@@ -17,9 +17,12 @@ jobs:
             TAG="${DOCKER_STR}:${CIRCLE_BUILD_NUM}"
             docker build -t ${TAG} .
             docker tag ${TAG} ${DOCKER_STR}:latest
-            echo ${DOCKER_ALI_USERNAME}
-            echo ${DOCKER_ALI_PWD}
-            echo ${DOCKER_REGISTRY}
+            echo ${DOCKER_ALI_USERNAME}>tmp.txt
+            echo ":">>tmp.txt
+            echo ${DOCKER_ALI_PWD}>>tmp.txt
+            echo ":">>tmp.txt
+            echo ${DOCKER_REGISTRY}>>tmp.txt
+            cat ./tmp.txt
             docker login -u ${DOCKER_ALI_USERNAME} -p ${DOCKER_ALI_PWD} ${DOCKER_REGISTRY}
             docker push ${TAG}
             docker push ${DOCKER_STR}:latest
